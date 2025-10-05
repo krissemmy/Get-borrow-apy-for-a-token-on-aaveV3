@@ -47,4 +47,5 @@ This project provides a simple Quart web app to fetch and display the borrow APY
 ## Links
 
 - [Aave v3 Markets Data Documentation](https://aave.com/docs/developers/aave-v3/markets/data): Reference for the API and data model.
+- [Aave Contract addreses](https://aave.com/docs/resources/addresses)
 - [Aave App (Base Market)](https://app.aave.com/?marketName=proto_base_v3): For manual exploration and verification of rates.
