@@ -1,25 +1,36 @@
 # Get-borrow-apy-for-a-token-on-aaveV3
 
-This project provides a simple Quart web app to fetch and display the borrow APY (including incentives) for a given token on Aave v3, for supported chains (e.g., Base).
+This project provides a simple Quart web app to fetch and display the borrow APY (including incentives) for a given token on Aave v3, for supported chains (Ethereum, Sonic, Base).
 
 ## How to Run
 
 1. **Install dependencies**:
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
 2. **Set up environment variables**:
-   - `CHAINS_ADDRESS_AND_CHAINID`: JSON mapping of chain names to their Aave v3 market addresses and chain IDs.
-   - `TOKENS_JSON`: JSON mapping of chain names to token symbol/address pairs.
+   Copy `env.example` to `.env` and configure the following variables:
+   - `CHAINS_ADDRESS_AND_CHAINID`: JSON mapping of chain names to their Aave v3 market addresses and chain IDs
+   - `TOKENS_JSON`: JSON mapping of chain names to token symbol/address pairs
 
-   You can use a `.env` file for convenience.
+   Example `.env` file:
+   ```bash
+   CHAINS_ADDRESS_AND_CHAINID='{"base": {"chainId": 8453, "market": "0xA238Dd80C259a72e81d7e4664a9801593F98d1c5"}}'
+   TOKENS_JSON='{"base": {"USDC": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"}}'
+   ```
 
 3. **Start the server**:
-   ```
+   ```bash
    python get_apy_of_a_token_on_base_on_aaveV3.py
    ```
-   The app will be available at [http://localhost:5002](http://localhost:5002).
+   The web app will be available at [http://localhost:5002](http://localhost:5002).
+
+## Supported Chains and Tokens
+
+- **Base**: USDC, EURC, GHO, USDbc, AAVE, WETH
+- **Ethereum**: USDC, EURC, WETH  
+- **Sonic**: USDC, wS
 
 ## Calculation Logic
 
