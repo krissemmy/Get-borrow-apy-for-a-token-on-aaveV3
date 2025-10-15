@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Aave Borrow APY (incl. incentives)</title>
+  </head>
+  <body>
+    <h2>Aave Borrow APY (incl. incentives)</h2>
+
+    <!-- GET: change chain -> repopulate tokens for that chain -->
+    <form method="GET" action="/">
+      <label>Chain:
+        <select name="chain" onchange="this.form.submit()">
+          {% for c in chains %}
+            <option value="{{ c }}" {% if c == chain %}selected{% endif %}>{{ c.title() }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <label>Token:
+        <select name="token">
+          {% for t in tokens %}
+            <option value="{{ t }}" {% if t == token %}selected{% endif %}>{{ t }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <!-- POST to /fetch to compute -->
+      <button type="submit" formaction="/fetch" formmethod="POST">Fetch</button>
+    </form>
+
+    {% if error %}
+      <p style="color:#b00">{{ error }}</p>
+    {% endif %}
+
+    {% if result %}
+      <hr>
+      <p><b>Chain:</b> {{ result.chain }}</p>
+      <p><b>Aave Chain Contract Address:</b> {{ result.chain_contract_address }}</p>
+      <p><b>Token:</b> {{ result.token }} ({{ result.address }})</p>
+      <p><b>Protocol APY (variable):</b> {{ result.protocol_pct }}</p>
+      <p><b>Borrow incentives (APY):</b> {{ result.incentive_pct }}</p>
+      <p><b>Total APY (Borrow Rate):</b> {{ result.total_pct }}</p>
+    {% endif %}
+  </body>
+</html>
