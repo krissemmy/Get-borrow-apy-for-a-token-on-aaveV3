@@ -1,1 +1,1 @@
-web: hypercorn get_apy_of_a_token_on_base_on_aaveV3:app --bind 0.0.0.0:$PORT
+web: hypercorn main:app --bind 0.0.0.0:$PORT
