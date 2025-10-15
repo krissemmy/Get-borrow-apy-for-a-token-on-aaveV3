@@ -1,9 +1,11 @@
 import os, json, requests
 from decimal import Decimal, getcontext
 from quart import Quart, request, render_template
+import httpx
 
 getcontext().prec = 40
 app = Quart(__name__)
+app.config.setdefault("PROVIDE_AUTOMATIC_OPTIONS", True)
 AAVE_GQL = "https://api.v3.aave.com/graphql"
 
 from dotenv import load_dotenv
@@ -106,7 +108,9 @@ async def fetch():
     }
     
     # Make the POST request to the Aave v3 GraphQL API
-    response = requests.post(AAVE_GQL, json={"query": GQL, "variables": variables}, timeout=30)
+    # response = requests.post(AAVE_GQL, json={"query": GQL, "variables": variables}, timeout=30)
+    async with httpx.AsyncClient(timeout=30) as client:
+        response = await client.post(AAVE_GQL, json={"query": GQL, "variables": variables})
     if response.status_code != 200:
         # If API call fails, show error and list tokens for that chain
         return await render_template("index.html", chains=CHAINS.keys(), tokens=TOKENS.get(chain, {}).keys(), result=None, error=f"Aave API error {response.status_code}")
@@ -151,6 +155,6 @@ async def fetch():
     )
 
 if __name__ == "__main__":
-    # http://127.0.0.1:5002
-    app.run(host="0.0.0.0", port=5002, debug=False)
+    # http://127.0.0.1:8000
+    app.run(host="0.0.0.0", port=8000, debug=False)
     
