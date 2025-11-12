@@ -22,7 +22,7 @@ This project provides a simple Quart web app to fetch and display the borrow APY
 
 3. **Start the server**:
    ```bash
-   python get_apy_of_a_token_on_base_on_aaveV3.py
+   python main.py
    ```
    The web app will be available at [http://localhost:5002](http://localhost:5002).
 

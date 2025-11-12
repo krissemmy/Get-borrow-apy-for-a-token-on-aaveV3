@@ -1,5 +1,3 @@
-quart
-requests
 python-dotenv
-hypercorn
 httpx
+fastapi[all]
